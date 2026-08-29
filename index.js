@@ -58,7 +58,8 @@ function getFocusState(minutes) {
 function getVisibleSeats() {
   const normalizedSearch = searchTerm.trim().toLocaleLowerCase("ko-KR");
   return seats
-    .filter((seat) => !normalizedSearch || (seat.status === "active" && seat.user.toLocaleLowerCase("ko-KR").includes(normalizedSearch)))
+    .filter((seat) => !normalizedSearch || seat.id.toLocaleLowerCase("ko-KR").includes(normalizedSearch) ||
+      (seat.status === "active" && seat.user.toLocaleLowerCase("ko-KR").includes(normalizedSearch)))
     .filter((seat) => activeFilter === "all" || activeFilter === "empty" && seat.status === "empty" || activeFilter === "active" && seat.status === "active" || activeFilter === "break" && seat.status === "active" && seat.minutes >= 120)
     .sort((a, b) => activeSort === "time" ? b.minutes - a.minutes || a.id.localeCompare(b.id) : a.id.localeCompare(b.id));
 }
