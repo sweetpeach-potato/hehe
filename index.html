@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="검색과 필터를 지원하는 오프라인 교실 좌석 이용 관리 앱">
+  <title>교실 좌석 이용관리 + 검색, 필터</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="emoji-sky" aria-hidden="true">
+    <span>🌈</span><span>⭐</span><span>✏️</span><span>☀️</span><span>🎒</span>
+    <span>📚</span><span>💡</span><span>🚀</span><span>🍀</span><span>🎨</span>
+  </div>
+
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">SMART CLASSROOM</p>
+        <h1><span aria-hidden="true">🏫</span> 교실 좌석 <em>이용관리</em></h1>
+        <p class="hero-copy">검색하고, 골라 보고, 집중 시간을 한눈에 관리해요.</p>
+      </div>
+      <button class="reset-button rainbow-button" id="reset-all" type="button">
+        <span aria-hidden="true">✨</span> 처음 상태로
+      </button>
+    </header>
+
+    <section class="summary-grid" aria-label="좌석 이용 요약">
+      <article class="summary-card summary-empty">
+        <div class="summary-icon" aria-hidden="true">🪑</div>
+        <div><p>빈 좌석</p><strong><span id="empty-count">12</span><small>석</small></strong></div>
+      </article>
+      <article class="summary-card summary-active">
+        <div class="summary-icon" aria-hidden="true">🔥</div>
+        <div><p>사용 중</p><strong><span id="active-count">0</span><small>석</small></strong></div>
+      </article>
+      <article class="summary-card summary-time">
+        <div class="summary-icon" aria-hidden="true">⏱️</div>
+        <div><p>총 이용 시간</p><strong><span id="total-minutes">0</span><small>분</small></strong></div>
+      </article>
+    </section>
+
+    <section class="seat-section" aria-labelledby="seat-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">MY STUDY SPOT</p>
+          <h2 id="seat-title">좌석을 선택해 주세요</h2>
+        </div>
+        <div class="legend" aria-label="상태 안내">
+          <span><i class="dot dot-empty"></i> 비어 있음</span>
+          <span><i class="dot dot-active"></i> 사용 중</span>
+          <span><i class="dot dot-break"></i> 휴식 필요</span>
+        </div>
+      </div>
+
+      <div class="control-card" aria-label="좌석 검색, 필터 및 정렬">
+        <label class="search-box" for="user-search">
+          <span aria-hidden="true">🔎</span>
+          <span class="sr-only">이용자 이름 검색</span>
+          <input id="user-search" type="search" autocomplete="off" placeholder="이용자 이름으로 검색">
+          <button class="clear-search" id="clear-search" type="button" aria-label="검색어 지우기" hidden>✕</button>
+        </label>
+        <div class="control-group" aria-labelledby="filter-label">
+          <span class="control-label" id="filter-label">상태</span>
+          <div class="segmented" id="status-filters">
+            <button class="chip is-selected" type="button" data-filter="all" aria-pressed="true">전체</button>
+            <button class="chip" type="button" data-filter="empty" aria-pressed="false">빈 좌석</button>
+            <button class="chip" type="button" data-filter="active" aria-pressed="false">사용 중</button>
+            <button class="chip" type="button" data-filter="break" aria-pressed="false">휴식 필요</button>
+          </div>
+        </div>
+        <div class="control-group" aria-labelledby="sort-label">
+          <span class="control-label" id="sort-label">정렬</span>
+          <div class="segmented" id="sort-options">
+            <button class="chip is-selected" type="button" data-sort="seat" aria-pressed="true">🔢 좌석 번호순</button>
+            <button class="chip" type="button" data-sort="time" aria-pressed="false">⏱️ 이용 시간 긴 순</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-bar">
+        <p id="results-count" role="status" aria-live="polite">전체 12개 좌석</p>
+        <button id="clear-controls" type="button">↻ 검색·필터 초기화</button>
+      </div>
+      <div class="seat-grid" id="seat-grid"></div>
+      <div class="no-results" id="no-results" hidden>
+        <span aria-hidden="true">🕵️‍♀️</span>
+        <h3>찾는 좌석이 없어요</h3>
+        <p>검색어나 상태 필터를 바꿔 보세요.</p>
+        <button class="rainbow-button" id="empty-reset" type="button">✨ 전체 좌석 다시 보기</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <template id="seat-template">
+    <article class="seat-card">
+      <div class="seat-topline"><div class="seat-number"></div><span class="status-badge"></span></div>
+      <div class="focus-character" aria-hidden="true"><span class="character-emoji"></span><span class="character-face">••</span></div>
+      <div class="seat-info"></div>
+      <div class="seat-actions"></div>
+    </article>
+  </template>
+
+  <script src="index.js"></script>
+</body>
+</html>
