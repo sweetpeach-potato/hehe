@@ -56,8 +56,8 @@
       <div class="control-card" aria-label="좌석 검색, 필터 및 정렬">
         <label class="search-box" for="user-search">
           <span aria-hidden="true">🔎</span>
-          <span class="sr-only">이용자 이름 검색</span>
-          <input id="user-search" type="search" autocomplete="off" placeholder="이용자 이름으로 검색">
+          <span class="sr-only">이용자 이름 또는 좌석 번호 검색</span>
+          <input id="user-search" type="search" autocomplete="off" placeholder="이름 또는 좌석 번호로 검색">
           <button class="clear-search" id="clear-search" type="button" aria-label="검색어 지우기" hidden>✕</button>
         </label>
         <div class="control-group" aria-labelledby="filter-label">
@@ -97,7 +97,10 @@
   <template id="seat-template">
     <article class="seat-card">
       <div class="seat-topline"><div class="seat-number"></div><span class="status-badge"></span></div>
-      <div class="focus-character" aria-hidden="true"><span class="character-emoji"></span><span class="character-face">••</span></div>
+      <div class="focus-character" aria-hidden="true">
+        <span class="character-emoji"></span>
+        <span class="character-face"><i class="face-eye eye-left"></i><i class="face-eye eye-right"></i><i class="face-mouth"></i></span>
+      </div>
       <div class="seat-info"></div>
       <div class="seat-actions"></div>
     </article>
